@@ -16,8 +16,12 @@ p {
   padding: 0;
 }
 
-body {
+body,
+html {
   font: 14px "microsoft yahei";
+  background-color: #888;
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -26,7 +30,6 @@ li {
 
 a {
   text-decoration: none;
-  color: #333;
 }
 
 img {
@@ -37,20 +40,6 @@ img {
 input {
   outline: none;
   border: 0 none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
-}
-
-.w {
-  width: 1200px;
-  margin: 0 auto;
 }
 
 .fl {

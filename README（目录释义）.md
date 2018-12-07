@@ -266,3 +266,9 @@ npm run dev 跑起来就完了
    ​      //name: 'login', //路由名称
 
    ​      // component: Login //路由需要的组件
+
+   #### 6.创建基本组件
+
+   6.1创建登录界面login.vue
+
+   
