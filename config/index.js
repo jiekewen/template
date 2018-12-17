@@ -5,6 +5,26 @@
 const path = require('path')
 
 module.exports = {
+  // vue项目解决跨域方法
+  // dev: {
+  //   env: require('./dev.env'),
+  //   port: 8080,
+  //   autoOpenBrowser: true,
+  //   assetsSubDirectory: 'static',
+  //   assetsPublicPath: '/',
+  //             主要解决跨域部分
+  //   proxyTable: {
+  //     '/api': {         //    /api就是访问地址  在页面发送get请求的时候 url部分直接写“/api” 就可以
+  //       target: 'http://192.168.0.136:8801', //目标接口域名  此位置写你想访问数据的路径
+  //       changeOrigin: true, //是否跨域
+  //       pathRewrite: {
+  //         '^/api': '' //重写接口
+  //       }
+  //     },
+  //     cssSourceMap: false
+  //   },
+  // },
+  // vue项目解决跨域方法结束
   dev: {
 
     // Paths
