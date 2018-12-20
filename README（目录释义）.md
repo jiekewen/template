@@ -271,4 +271,82 @@ npm run dev 跑起来就完了
 
    6.1创建登录界面login.vue
 
+   ####7.如何在本地让其他电脑访问？
+
+   7.1 首先，在根目录下的package.json文件夹中  找到scripts
+
+   ​	其次在scripts下的dev的结尾增加一个参数
+
+   ######--host 192.168.0.123，
+
+   就可以了，替换本机IP（其中123是自己的本地ip）(获取本地ip方法在黑窗口下  打出  ipconfig即可)（"scripts": { "dev": "webpack-dev-server --content-base test/ --open --inline --hot --compress --history-api-fallback --port 8081 --config build/webpack.dev.config.js --host 192.168.0.123", ）
+
+   #### 8.如何解决vue项目的跨域问题
+
+   8.1 如下方法只适用于本地访问的时候   获取本地数据的跨越问题，用于开发环境，
+
+   ​	首先，在根目录文件中的找到config文件夹里面的index.js文件中作如下更改
+
+   ​	dev: {
+
+   ​    env: require('./dev.env'),
+
+   ​    port: 8080,
+
+   ​    autoOpenBrowser: true,
+
+   ​    assetsSubDirectory: 'static',
+
+   ​    assetsPublicPath: '/',
+
+   ​              // 主要解决跨域部分
+
+   ​    proxyTable: {
+
+   ​      '/api': {         //    /api就是访问地址  在页面发送get请求的时候 url部分直接写“/api” 就可以
+
+   ​        target: 'http://192.168.0.136:8801', //目标接口域名  此位置写你想访问数据的路径
+
+   ​        changeOrigin: true, //是否跨域
+
+   ​        pathRewrite: {
+
+   ​          '^/api': '' //重写接口
+
+   ​        }
+
+   ​      },
+
+   ​      cssSourceMap: false
+
+   ​    },
+
+     },
+
+   ​	8.2在需要跨域的界面引入获取就可以了  如下
+
+   created() {
+
+   ​    axios.get("/api").then(response => {
+
+   ​      this.tableData = response.data.chinfo[0].devinfo[0].devmeas;
+
+   ​      console.log(response.data.chinfo[0].devinfo[0].devmeas);
+
+   ​    });
+
+     }
+
+   #### 9.设置网页小图标
+
+   9.1找到根目录下的index.html文件  中  在<head></head>的标签里加一项
+
+   1、要想给网站添加图标，我们首先需要准备一张ico图片。这个图标我们可以自己设计，也可以在网上找。它的尺寸一般为16x16或者32x32。 
+   2、我们把图片命名为favicon.ico，记住后缀一定要是ico。然后我们把图片上传到网站根目录 
+   3、我们在网站首页中如下插入代码
+
+   <link rel="shortcuticon" href="/favicon.ico" />
+   --------------------- 
+   
+
    
