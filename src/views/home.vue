@@ -1,74 +1,127 @@
 <template>
   <!-- 总体布局 -->
-  <el-container>
+  <!-- 给总体布局设置min-height: 100vh 视窗百分百   -->
+  <el-container class="height">
     <!-- 头部header部分 -->
     <el-header>
       <el-row>
+        <!-- 1.头部左侧 -->
         <el-col :span="8">
-          <div>左</div>
+          <!-- 时间戳 -->
+          <div id="date">左</div>
         </el-col>
+        <!-- 2.头部中间 -->
         <el-col :span="8">
-          <div>中</div>
+          <!-- 中间标题 -->
+          <div>宽月加油</div>
         </el-col>
+        <!-- 3.头部右侧 -->
         <el-col :span="8">
-          <div>右</div>
+          <div>右部分</div>
         </el-col>
       </el-row>
     </el-header>
+    <!-- 头部以下部分 -->
     <el-container>
       <!-- nav部分 -->
-      <el-aside width="200px">
-        <el-row class="tac">
-          <!-- default-active="2"点击 文字颜色改变-->
-          <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-            <el-submenu index="1" class="w200">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
-              </template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-              <el-submenu index="1-3" class="w200">
-                <template slot="title">选项3</template>
-                <el-menu-item index="1-3-1">选项3-1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
-            <el-menu-item index="2" class="w200">
-              <i class="el-icon-menu"></i>
-              <span slot="title">导航二</span>
+      <el-col :span="12" class="nav w200">
+        <!-- 此处的 有router才可以实现跳转路由  此处的default-active可以默认选中first-->
+        <el-menu background-color="skyblue" text-color="#000" router default-active="/first">
+          <template v-for="item in menus">
+            <el-menu-item :key="item.id" :index="item.url">
+              <!-- 用于展示小图标并设置图标样式 -->
+              <i :class="item.className" style="width:21px; height:21px;"></i>
+              <!-- 导航栏的标题 -->
+              <span slot="title">{{item.title}}</span>
             </el-menu-item>
-            <el-menu-item index="3" class="w200">
-              <i class="el-icon-setting"></i>
-              <span slot="title">导航三</span>
-            </el-menu-item>
-          </el-menu>
-        </el-row>
-      </el-aside>
+          </template>
+        </el-menu>
+      </el-col>
       <!-- 主体部分 -->
       <el-main>
-        <template>
-          <el-carousel :interval="4000" type="card" height="200px">
-            <el-carousel-item v-for="item in 6" :key="item">
-              <h3>{{ item }}</h3>
-            </el-carousel-item>
-          </el-carousel>
-        </template>
-      </el-main>
-    </el-container>
-  </el-container>
-</template>
-        <!-- 视图容器 -->
-        <router-view></router-view>
+        <router-view class="h">右侧的显示部分 不过一般都被选中的组件覆盖</router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+// 时间显示方法
+var interval = setInterval(function() {
+  var week = [
+    "星期日",
+    "星期一",
+    "星期二",
+    "星期三",
+    "星期四",
+    "星期五",
+    "星期六"
+  ];
+  var myDate = new Date();
+  var year = myDate.getFullYear();
+  var month = myDate.getMonth() + 1;
+  var hour = myDate.getHours();
+  var showHour = hour > 12 ? hour - 12 : hour;
+  var day = myDate.getDate();
+  var minute = myDate.getMinutes();
+  minute = minute < 10 ? "0" + minute : minute.toString();
+  var dayOfWeek = week[myDate.getDay()];
+  if (document.getElementById("date")) {
+    document.getElementById("date").innerHTML =
+      year +
+      "年" +
+      month +
+      "月" +
+      day +
+      "日 " +
+      dayOfWeek +
+      " " +
+      hour +
+      ":" +
+      minute;
+  }
+}, 1000);
 export default {
   data() {
     return {
-      menus: []
+      menus: [
+        {
+          title: "佳佳文",
+          url: "/first",
+          id: 1,
+          className: "el-icon-nav-1"
+        },
+        {
+          title: "刀大杀人多",
+          url: "/second",
+          id: 2,
+          className: "el-icon-nav-2"
+        },
+        {
+          title: "小肥龙",
+          url: "/third",
+          id: 3,
+          className: "el-icon-nav-3"
+        },
+        {
+          title: "小胖纸",
+          url: "/forth",
+          id: 4,
+          className: "el-icon-nav-4"
+        },
+        {
+          title: "爱新觉罗杰克文",
+          url: "/fifth",
+          id: 5,
+          className: "el-icon-nav-1"
+        },
+        {
+          title: "短暂才会美丽",
+          url: "/sixth",
+          id: 6,
+          className: "el-icon-nav-1"
+        }
+      ]
     };
   },
   methods: {}
@@ -76,25 +129,52 @@ export default {
 </script>
 
 <style lang="">
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+/* 导航小图标 */
+.el-icon-nav-1 {
+  background: url("../../static/images/nav-1.gif") no-repeat;
 }
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
+.el-icon-nav-2 {
+  background: url("../../static/images/nav-2.gif") no-repeat;
 }
+.el-icon-nav-3 {
+  background: url("../../static/images/nav-3.gif") no-repeat;
+}
+.el-icon-nav-4 {
+  background: url("../../static/images/nav-4.gif") no-repeat;
+}
+/* 选中状态字体的颜色 */
+.el-menu-item.is-active {
+  background-color: #86bbbb !important;
+  color: #000;
+}
+/* 去除导航栏右侧边框 */
+.el-menu {
+  border: none;
+}
+/* 导航栏鼠标悬停的背景色 */
+.el-menu-item:hover {
+  background-color: #86bbbb !important;
+}
+/* 导航栏宽度 */
 .w200 {
   width: 200px;
 }
+/* 高度为视窗高度 */
+.height {
+  min-height: 100vh;
+}
+/* 导航栏背景颜色以及弹性布局 */
+.nav {
+  display: flex;
+  flex-direction: column;
+  background-color: #86bbbb;
+}
+/* header样式 */
 .el-header {
-  background-color: #b3c0d1;
+  background-color: #999;
 }
-
-.el-aside {
-  background-color: #d3dce6;
-}
-
+/* 主体部分 */
 .el-main {
-  background-color: #e9eef3;
+  background-color: #666;
 }
 </style>

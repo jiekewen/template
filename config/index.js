@@ -5,7 +5,7 @@
 const path = require('path')
 
 module.exports = {
-  // vue项目解决跨域方法
+  // vue项目解决本地端口不同跨域方法
   // dev: {
   //   env: require('./dev.env'),
   //   port: 8080,
