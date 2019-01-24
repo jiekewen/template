@@ -35,6 +35,22 @@
               <span slot="title">{{item.title}}</span>
             </el-menu-item>
           </template>
+          <!-- 有次级选项的导航 -->
+          <el-submenu index="1-4">
+            <template slot="title">尤里佳佳文</template>
+            <el-menu-item index="/first">
+              <i class="el-icon-nav-1" style="width:21px; height:21px;"></i>
+              <span slot="title">选项1</span>
+            </el-menu-item>
+            <el-menu-item index="/second">
+              <i class="el-icon-nav-2" style="width:21px; height:21px;"></i>
+              <span slot="title">选项2</span>
+            </el-menu-item>
+            <el-menu-item index="third">
+              <i class="el-icon-nav-3" style="width:21px; height:21px;"></i>
+              <span slot="title">选项3</span>
+            </el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-col>
       <!-- 主体部分 -->
@@ -113,7 +129,7 @@ export default {
           title: "爱新觉罗杰克文",
           url: "/fifth",
           id: 5,
-          className: "el-icon-nav-1"
+          className: "el-icon-nav-5"
         },
         {
           title: "短暂才会美丽",
@@ -141,6 +157,9 @@ export default {
 }
 .el-icon-nav-4 {
   background: url("../../static/images/nav-4.gif") no-repeat;
+}
+.el-icon-nav-5 {
+  background: url("../../static/images/nav-5.gif") no-repeat;
 }
 /* 选中状态字体的颜色 */
 .el-menu-item.is-active {
